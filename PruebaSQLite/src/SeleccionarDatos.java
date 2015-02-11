@@ -1,27 +1,30 @@
 import java.sql.*;
 
+/**
+ * Desde esta clase conectamos a la BD y seleccionamos los datos.
+ * @author Arturo
+ *
+ */
 public class SeleccionarDatos
 {
-  public static void main( String args[] )
+  /**
+   * Constructor de la clase SeleccionarDatos.	
+   * @param rutaDB
+   */
+  public SeleccionarDatos(String rutaDB)
   {
 	//Definición de variables  
     Connection conexion = null;
     Statement stmt = null;
     
     try {
-      //Cargamos la clase JDBC
-      Class.forName("org.sqlite.JDBC");
-      //Conectamos a la BD
-      conexion = DriverManager.getConnection("jdbc:sqlite:C:/Users/Arturo/Desktop/FMT/BBDDSerlitrans.db");
-      //Deshabilitamos la confirmación automática para la conexión
-      conexion.setAutoCommit(false);
-      //Mostramos el siguiente mensaje en consola
-      System.out.println("La Base de Datos se ha abierto correctamente");
+      Class.forName("org.sqlite.JDBC"); //Cargamos la clase JDBC
+      conexion = DriverManager.getConnection("jdbc:sqlite:" + rutaDB); //Conectamos a la DB
+      conexion.setAutoCommit(false); //Deshabilitamos la confirmación automática para la conexión
+      System.out.println("La Base de Datos se ha abierto correctamente"); //Mostramos el siguiente mensaje en consola
 
-      //Utilizamos el método createStatement con la BD a la que estamos conectados
-      stmt = conexion.createStatement();
-      //Guardamos el resultado de la consulta en una variable
-      ResultSet resultadoConsulta = stmt.executeQuery( "SELECT * FROM USUARIOS;" );
+      stmt = conexion.createStatement(); //Utilizamos el método createStatement con la BD a la que estamos conectados
+      ResultSet resultadoConsulta = stmt.executeQuery( "SELECT * FROM USUARIOS;" ); //Guardamos el resultado de la consulta en una variable
       
       /*
  	  * Probamos el funcionamiento:
@@ -36,16 +39,11 @@ public class SeleccionarDatos
          System.out.println();
       }
       
-      //Cerramos la consulta
-      resultadoConsulta.close();
-      //Cerramos el método statement
-      stmt.close();
-      //Cerramos la conexión con la BD
-      conexion.close();
+      resultadoConsulta.close(); //Cerramos la consulta
+      stmt.close(); //Cerramos el método statement
+      conexion.close(); //Cerramos la conexión con la BD
       
-    /*
-     *  Si obtenemos un error imprimimos un mensaje en la consola y salimos  
-     */
+    //Si obtenemos un error imprimimos un mensaje en la consola y salimos  
     } catch ( Exception e ) {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);
