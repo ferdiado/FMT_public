@@ -28,6 +28,7 @@ public class VentanaCompilador extends JFrame {
 
 	//Definición de objetos
 	private String rutaDB; //Almacena la ruta de la DB
+	private String rutaDestino; //Almacena la ruta de destino
 	private JPanel contentPane;
 	private JTextField textFieldRutaDB;
 	private JTextField textFieldRutaDestino;
@@ -52,10 +53,18 @@ public class VentanaCompilador extends JFrame {
 		//Caja de texto para la ruta de la DB
 		textFieldRutaDB = new JTextField();
 		textFieldRutaDB.setFont(new Font("Arial", Font.PLAIN, 14));
-		textFieldRutaDB.setText("c:/user/carpeta1/carpeta2/archivo.db");
+		textFieldRutaDB.setText("c:/users/carpeta1/carpeta2/archivo.db");
 		textFieldRutaDB.setBounds(10, 51, 400, 20);
 		contentPane.add(textFieldRutaDB);
 		textFieldRutaDB.setColumns(10);
+		
+		//Caja de texto ruta de destino
+		textFieldRutaDestino = new JTextField();
+		textFieldRutaDestino.setFont(new Font("Arial", Font.PLAIN, 14));
+		textFieldRutaDestino.setBounds(10, 135, 400, 20);
+		contentPane.add(textFieldRutaDestino);
+		textFieldRutaDestino.setColumns(10);
+				
 		
 		//Botón para conectar a la DB
 		btnConectar = new JButton("Compilar");
@@ -75,12 +84,6 @@ public class VentanaCompilador extends JFrame {
 		lblRutaDeDestino.setBounds(10, 110, 250, 14);
 		contentPane.add(lblRutaDeDestino);
 		
-		//Caja de texto ruta de destino
-		textFieldRutaDestino = new JTextField();
-		textFieldRutaDestino.setBounds(10, 135, 400, 20);
-		contentPane.add(textFieldRutaDestino);
-		textFieldRutaDestino.setColumns(10);
-		
 		//Logotipo
 		lblLogotipo = new JLabel("");
 		lblLogotipo.setForeground(SystemColor.desktop);
@@ -92,8 +95,9 @@ public class VentanaCompilador extends JFrame {
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					rutaDB = textFieldRutaDB.getText(); //Guarda el texto introducido en rutaDB
-					SeleccionarDatos conectarYSeleccionar = new SeleccionarDatos(rutaDB); //Ejecuta la clase SeleccionarDatos y le pasa la variable RutaDB
+					rutaDB = textFieldRutaDB.getText(); //Guarda el texto introducido en textFieldRutaDB
+					rutaDestino = textFieldRutaDestino.getText(); //Guarda el texto introducido en textFieldRutaDestino
+					SeleccionarDatos conectarYSeleccionar = new SeleccionarDatos(rutaDB, rutaDestino); //Ejecuta la clase SeleccionarDatos y le pasa la variable RutaDB
 				} catch (Exception e) {
 					e.printStackTrace(); //Imprime el error en la consola
 				}
