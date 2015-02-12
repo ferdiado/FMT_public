@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -8,14 +7,17 @@ import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 /**
  * Clase en la que se define la ventana del compilador.
@@ -25,11 +27,14 @@ import java.awt.Font;
 public class VentanaCompilador extends JFrame {
 
 	//Definición de objetos
-	private JPanel contentPane;
 	private String rutaDB; //Almacena la ruta de la DB
+	private JPanel contentPane;
 	private JTextField textFieldRutaDB;
-	private JButton btnConectar;
+	private JTextField textFieldRutaDestino;
 	private JLabel lblRutaAlArchivo;
+	private JLabel lblRutaDeDestino;
+	private JButton btnConectar;
+	private JLabel lblLogotipo;
 
 	/**
 	 * Crea la ventana.
@@ -37,7 +42,8 @@ public class VentanaCompilador extends JFrame {
 	public VentanaCompilador() {
 		//Define la ventana
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(100, 100, 600, 339);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,7 +60,7 @@ public class VentanaCompilador extends JFrame {
 		//Botón para conectar a la DB
 		btnConectar = new JButton("Compilar");
 		btnConectar.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnConectar.setBounds(434, 50, 140, 23);
+		btnConectar.setBounds(444, 133, 140, 23);
 		contentPane.add(btnConectar);
 		
 		//Etiqueta ruta
@@ -62,6 +68,25 @@ public class VentanaCompilador extends JFrame {
 		lblRutaAlArchivo.setFont(new Font("Arial", Font.BOLD, 16));
 		lblRutaAlArchivo.setBounds(10, 11, 250, 29);
 		contentPane.add(lblRutaAlArchivo);
+		
+		//Etiqueta ruta de destino
+		lblRutaDeDestino = new JLabel("Ruta de destino");
+		lblRutaDeDestino.setFont(new Font("Arial", Font.BOLD, 16));
+		lblRutaDeDestino.setBounds(10, 110, 250, 14);
+		contentPane.add(lblRutaDeDestino);
+		
+		//Caja de texto ruta de destino
+		textFieldRutaDestino = new JTextField();
+		textFieldRutaDestino.setBounds(10, 135, 400, 20);
+		contentPane.add(textFieldRutaDestino);
+		textFieldRutaDestino.setColumns(10);
+		
+		//Logotipo
+		lblLogotipo = new JLabel("");
+		lblLogotipo.setForeground(SystemColor.desktop);
+		lblLogotipo.setIcon(new ImageIcon("c:/users/arturo/desktop/fmt/logo.png"));
+		lblLogotipo.setBounds(483, 188, 101, 111);
+		contentPane.add(lblLogotipo);
 		
 		//Botón compilar
 		btnConectar.addActionListener(new ActionListener() {
