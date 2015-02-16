@@ -91,7 +91,7 @@ public class VentanaCompilador extends JFrame {
 		//Logotipo
 		lblLogotipo = new JLabel("");
 		lblLogotipo.setForeground(SystemColor.desktop);
-		lblLogotipo.setIcon(new ImageIcon("c:/users/arturo/desktop/Google Drive/fmt/logo.png"));
+		lblLogotipo.setIcon(new ImageIcon(VentanaCompilador.class.getResource("logo.png")));
 		lblLogotipo.setBounds(483, 188, 101, 111);
 		contentPane.add(lblLogotipo);
 		
