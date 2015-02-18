@@ -288,7 +288,7 @@ public class MainActivity extends Activity {
 		baseDatos.close();
     }
     
-    public static void insertaDatos(int id,String nombre){
+    public static void insertaDatos(int id,String nombre){ //Recibe los datos de ControlUSB
     	SQLiteDatabase baseDatos=datosBd.getWritableDatabase();
     	if(baseDatos!=null)
 		{
