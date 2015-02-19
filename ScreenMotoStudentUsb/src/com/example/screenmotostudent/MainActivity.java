@@ -274,7 +274,11 @@ public class MainActivity extends Activity {
 		//String[] campos = new String[] {"id", "nombre"};
 		//String[] args = new String[] {"Usuario 4"}; seleccionar un registro
 		//Cursor c = baseDatos.query("tablaDatos", campos,"nombre=?",args, null, null, null);
-		String[] campos = new String[] {"id", "nombre"};
+		/*
+		 * He adecuado los campos a los datos que manda el Arduino
+		 * @Arturo
+		 */
+		String[] campos = new String[] {"id", "vueltas", "horDel", "horTra", "tempAceite", "tempAgua", "micros"}; //String con los campos de la BD
 		//                                              where arg  groupby habving order by    
 		Cursor c = baseDatos.query("tablaDatos", campos,null,null, null, null, null);//seleccionando todos los registros
 		//resultado.setText("");
@@ -290,13 +294,28 @@ public class MainActivity extends Activity {
 		baseDatos.close();
     }
     
+    /*
+     * He hecho modificaciones
+     * @Arturo
+     */
     public static void insertaDatos(int id,String nombre){
     	SQLiteDatabase baseDatos=datosBd.getWritableDatabase();
     	if(baseDatos!=null)
 		{
-    	
-    	baseDatos.execSQL("INSERT INTO tablaDatos(id,nombre)"+  "VALUES (" + id + ", '" + nombre +"')" );
-   
+    		if(nombre.startsWith("#") && nombre.endsWith("#")) { //Si el String de datos empieza y acaba con *
+    			String[] partes = nombre.split("*"); //Partimos los datos que nos envía el Arduino
+    			String parteVueltas = partes[0]; // Vueltas
+    			String parteHorDel = partes[1]; // Horquilla delantera
+    			String parteHorTra = partes[2]; // Horquilla trasera
+    			String parteTempAceite = partes[3]; // Temperatura aceite
+    			String parteTempAgua = partes[4]; // Temperatura agua
+    			String parteMicros = partes[5]; // Tiempo en ¿microsegundos?
+    			//Metemos los datos en la BD
+    			baseDatos.execSQL("INSERT INTO tablaDatos(id,vueltas,horDel,horTra,tempAceite,tempAgua,micros)"+  "VALUES ("+ id +", "+ parteVueltas +", "+ parteHorDel +", "+ parteHorTra +", "+ parteTempAceite +", "+ parteTempAgua +", "+ parteMicros +")" );
+    		} else {
+    			baseDatos.close();
+    			System.out.println("Hay un error en los datos recibidos por el Arduino");
+    		}
 		}
     	 baseDatos.close();
     }

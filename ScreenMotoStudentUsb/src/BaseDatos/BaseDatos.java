@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 public class BaseDatos extends SQLiteOpenHelper {
 	 
-	String crearTabla="CREATE TABLE  tablaDatos(id INTEGER,nombre TEXT)";
+	String crearTabla="CREATE TABLE  tablaDatos(id INTEGER,vueltas TEXT,horDel TEXT,horTra TEXT,tempAceite TEXT,tempAgua TEXT,micros TEXT)"; //He hecho modificaciones @Arturo
 	private static String DB_PATH = "/data/data/com.aguilax.motostudent/databases/";
     //private static String DB_NAME = "db_calc";
 	public BaseDatos(Context contexto, String nombre, CursorFactory factory,int version) {
