@@ -311,7 +311,7 @@ public class MainActivity extends Activity {
     			String parteTempAgua = partes[4]; // Temperatura agua
     			String parteMicros = partes[5]; // Tiempo en ¿microsegundos?
     			//Metemos los datos en la BD
-    			baseDatos.execSQL("INSERT INTO tablaDatos(id,vueltas,horDel,horTra,tempAceite,tempAgua,micros)"+  "VALUES ("+ id +", "+ parteVueltas +", "+ parteHorDel +", "+ parteHorTra +", "+ parteTempAceite +", "+ parteTempAgua +", "+ parteMicros +")" );
+    			baseDatos.execSQL("INSERT INTO tablaDatos(id,vueltas,horDel,horTra,tempAceite,tempAgua,micros)"+  "VALUES ('"+id+"','"+parteVueltas+"','"+parteHorDel+"','"+parteHorTra+"','"+parteTempAceite+"','"+parteTempAgua+"','"+parteMicros+"')" );
     		} else {
     			baseDatos.close();
     			System.out.println("Hay un error en los datos recibidos por el Arduino");
