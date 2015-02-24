@@ -202,7 +202,7 @@ public class MainActivity extends Activity {
         @Override
         public void run() {
             velocidad.setText(""+150+"Km/h");
-            temperatura.setText(""+60+"º");
+            temperatura.setText(""+60+"Âº");
         }
     };
     final Runnable proceso = new Runnable() {
@@ -284,7 +284,7 @@ public class MainActivity extends Activity {
 		//resultado.setText("");
 		//Nos aseguramos de que existe al menos un registro
 		if (c.moveToFirst()) {
-		     //Recorremos el cursor hasta que no haya más registros
+		     //Recorremos el cursor hasta que no haya mÃ¡s registros
 		     do {
 		          String id= c.getString(0);
 		          String nombre = c.getString(1);
@@ -302,16 +302,17 @@ public class MainActivity extends Activity {
     	SQLiteDatabase baseDatos=datosBd.getWritableDatabase();
     	if(baseDatos!=null)
 		{
+			 Toast.makeText(getApplicationContext(),"Entra en insetaDATOS", Toast.LENGTH_LONG).show();
     		if(nombre.startsWith("#") && nombre.endsWith("#")) { //Si el String de datos empieza y acaba con *
-    			String[] partes = nombre.split("*"); //Partimos los datos que nos envía el Arduino
+    			String[] partes = nombre.split("*"); //Partimos los datos que nos envÃ­a el Arduino
     			String parteVueltas = partes[0]; // Vueltas
     			String parteHorDel = partes[1]; // Horquilla delantera
     			String parteHorTra = partes[2]; // Horquilla trasera
     			String parteTempAceite = partes[3]; // Temperatura aceite
     			String parteTempAgua = partes[4]; // Temperatura agua
-    			String parteMicros = partes[5]; // Tiempo en ¿microsegundos?
+    			String parteMicros = partes[5]; // Tiempo en Â¿microsegundos?
     			//Metemos los datos en la BD
-    			baseDatos.execSQL("INSERT INTO tablaDatos(id,vueltas,horDel,horTra,tempAceite,tempAgua,micros)"+  "VALUES ('"+id+"','"+parteVueltas+"','"+parteHorDel+"','"+parteHorTra+"','"+parteTempAceite+"','"+parteTempAgua+"','"+parteMicros+"')" );
+    			baseDatos.execSQL("INSERT INTO tablaDatos(id,vueltas,horDel,horTra,tempAceite,tempAgua,micros) "+ "VALUES ('"+id+"','"+parteVueltas+"','"+parteHorDel+"','"+parteHorTra+"','"+parteTempAceite+"','"+parteTempAgua+"','"+parteMicros+"')" );
     		} else {
     			baseDatos.close();
     			System.out.println("Hay un error en los datos recibidos por el Arduino");
